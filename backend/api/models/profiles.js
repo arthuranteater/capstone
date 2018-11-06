@@ -1,16 +1,15 @@
 const mongoose = require('mongoose')
 
-const profileSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+const profileSchema = new mongoose.Schema({
     userName: String,
     password: String,
     email: String,
     firstName: String,
     lastName: String,
     petName: String,
-    activateKey: Number,
+    activateKey: String,
     petName2: String,
-    activateKey2: Number
+    activateKey2: String
 })
 
 module.exports = mongoose.model('Profile', profileSchema)
