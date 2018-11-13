@@ -1,1 +1,1 @@
-Go to capstone-frontend repo to see all details.
+See capstone-client repo for details.
