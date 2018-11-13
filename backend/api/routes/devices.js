@@ -19,12 +19,11 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    device = new Device({
-        _id: new mongoose.Types.ObjectId(),
-        userName: req.params.body.userName,
-        deviceKey: req.params.body.deviceKey,
-        latitude: req.params.body.latitude,
-        longitude: req.params.body.longitude,
+    const device = new Device({
+        userName: req.body.userName,
+        deviceKey: req.body.deviceKey,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
     })
     device.save().then(result => {
         console.log(result)
@@ -42,7 +41,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     const id = req.params.id
-    Profile.findById(id).exec().then(result => {
+    Device.findById(id).exec().then(result => {
         console.log("from db", result)
         if (result) {
             res.status(200).json(result)
@@ -63,7 +62,7 @@ router.patch('/:id', (req, res, next) => {
     for (const ops of req.body) {
         updateOps[ops.propName] = ops.value
     }
-    Profile.update({ _id: id }, { $set: updateOps }).exec().then(result => {
+    Device.update({ _id: id }, { $set: updateOps }).exec().then(result => {
         console.log(result)
         res.status(200).json(result)
     }).catch(err => {
@@ -77,7 +76,7 @@ router.patch('/:id', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     const id = req.params.id
-    Profile.remove({ _id: id }).exec().then(result => {
+    Device.remove({ _id: id }).exec().then(result => {
         res.status(200).json(result)
     }).catch(err => {
         console.log(err)
